@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="w-full h-screen flex flex-col py-20 px-24">
+        <section class="w-full py-24">
+            <h1 class="text-2xl font-bold">Basic Animations</h1>
+            <div class="w-full flex justify-around mt-10">
+                <div class="bg-emerald-500 w-48 h-48 rbox"></div>
+                <div class="bg-emerald-500 w-48 h-48 rbox"></div>
+                <div class="bg-emerald-500 w-48 h-48 rbox op"></div>
+            </div>
+        </section>
+        <section class="w-full py-24">
+            <h1 class="text-2xl font-bold">SVG</h1>
+            <div class="grid grid-cols-3 gap-10 mt-10">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="text-emerald-500  p-10">
+                    <circle cx="50" cy="50" r="45" fill="white" stroke="green" stroke-width="1"   />
+                </svg>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" />
+                </svg>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" />
+                </svg>
+            </div>
+        </section>
+        <section class="w-full py-24">
+            <h1 class="text-2xl font-bold">Numbers</h1>
+            <div class="flex justify-center mt-10">
+                <p class="count text-6xl text-emerald-500 px-6 py-4 border border-emerald-500 rounded-lg"></p>
+            </div>
+                
+        </section>
+    </div>
+    
+    <script type="module">
+        import { animate, scroll } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+        const boxes = document.querySelectorAll(".rbox");
+        const opacityBox= document.querySelectorAll(".op");
+        const count = document.querySelector(".count");
+
+        // Basic Animations
+        animate(boxes, 
+            { rotate: 90 },
+            { type: "spring", stiffness: 300, repeat: Infinity, }
+        );
+        animate(opacityBox, {opacity: .5}, {duration: 2})
+
+        //Animating SVG Paths
+        animate("circle", { pathLength: [0, 1] }, {duration: 2} )
+        
+
+        animate(0, 100, {
+            duration: 2,
+            ease: "circOut",
+            onUpdate: (latest) => (count.innerHTML = Math.round(latest)),
+        })
+
+
+    </script>
+</body>
+</html>
